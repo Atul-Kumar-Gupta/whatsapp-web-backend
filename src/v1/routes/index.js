@@ -1,4 +1,9 @@
-import register from '../register/routes.js'
+import users from '../users/routes.js'
 export default function (app) {
-    register(app)
+    users(app)
+
+
+
+
+
 }
