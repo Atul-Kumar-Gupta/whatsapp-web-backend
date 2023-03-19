@@ -1,7 +1,7 @@
 export const registrationModel = (body) => {
     const model = {
         mobile: body.mobile ? body.mobile : '',
-        name: body.name ? body.name : body.mobile ? body.mobile : '',
+        name: body.name ? body.name : '',
         image: body.image ? body.image : '',
         email: body.email ? body.email : '',
         encryption_key: body.encryptionKey ? body.encryptionKey : ''

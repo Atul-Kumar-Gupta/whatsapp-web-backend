@@ -5,7 +5,7 @@ import { v4 as uuid } from 'uuid';
 import otpGenerator from 'otp-generator';
 import moment from 'moment';
 import { LoginToken } from '../../tokenGenerator';
-import { executeOne, insert } from '../../dbHelper';
+import { execute, executeOne, insert } from '../../dbHelper';
 const { schemaName, tableName } = constant
 
 export const sendLoginOtp = async (body) => {
@@ -63,4 +63,9 @@ export const getInfo = async (id) => {
         console.error(err)
     }
 
+}
+
+export const searchProfile = async (input) => {
+    const res = await execute(`select image,name,mobile from ${schemaName.user}.${tableName.user_detail} where name like '${input}%' or mobile like '${input}%' limit 10`)
+    return res
 }

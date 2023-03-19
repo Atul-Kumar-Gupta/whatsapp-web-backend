@@ -1,7 +1,7 @@
 import constant from "../../constant.js"
 import serviceResponse from "../../serviceResponse.js"
 import { verifyToken } from "../../tokenGenerator.js"
-import { getInfo, sendLoginOtp, verifyLoginOtp } from "./controller.js"
+import { getInfo, searchProfile, sendLoginOtp, verifyLoginOtp } from "./controller.js"
 
 const routes = (app) => {
 
@@ -31,6 +31,18 @@ const routes = (app) => {
     })
     app.get('/v1/get-info', verifyToken, (req, res) => {
         getInfo(req.id).then((result) => {
+            res.send(serviceResponse({
+                result,
+                status: constant.apiStatus.success,
+                allowed: true,
+            }))
+        }).catch((error) => {
+            res.send(serviceResponse({ error, status: constant.apiStatus.failed }))
+        })
+    })
+
+    app.get('/v1/search-profile', verifyToken, (req, res) => {
+        searchProfile(req.query.input).then((result) => {
             res.send(serviceResponse({
                 result,
                 status: constant.apiStatus.success,
